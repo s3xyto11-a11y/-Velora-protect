@@ -3,14 +3,44 @@ const pageNav = document.getElementById('nav');
 const pageLanguageToggle = document.getElementById('languageToggle');
 let pageLanguage = 'bg';
 
-pageMenu?.addEventListener('click', () => pageNav.classList.toggle('open'));
-pageNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => pageNav.classList.remove('open')));
+if (pageNav && !pageNav.querySelector('a[href="guides.html"]')) {
+    pageNav.querySelector('a[href="gallery.html"]')?.insertAdjacentHTML('afterend', '<a class="desktop-guides-link" href="guides.html" data-bg="Полезно" data-en="Guides">Полезно</a>');
+}
+
+if (pageMenu && pageNav) {
+    pageMenu.setAttribute('aria-controls', 'nav');
+    pageMenu.setAttribute('aria-expanded', 'false');
+
+    const setPageMenuOpen = isOpen => {
+        pageNav.classList.toggle('open', isOpen);
+        pageMenu.setAttribute('aria-expanded', String(isOpen));
+        pageMenu.setAttribute('aria-label', isOpen ? 'Затвори менюто' : 'Отвори менюто');
+    };
+
+    pageMenu.addEventListener('click', event => {
+        event.stopPropagation();
+        setPageMenuOpen(!pageNav.classList.contains('open'));
+    });
+    pageNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setPageMenuOpen(false)));
+    document.addEventListener('click', event => {
+        if (pageNav.classList.contains('open') && !pageNav.contains(event.target)) setPageMenuOpen(false);
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && pageNav.classList.contains('open')) {
+            setPageMenuOpen(false);
+            pageMenu.focus();
+        }
+    });
+}
 
 function setPageLanguage(language) {
     pageLanguage = language;
     document.documentElement.lang = language;
     document.querySelectorAll('[data-bg][data-en]').forEach(element => {
         element.textContent = element.dataset[language];
+    });
+    document.querySelectorAll('[data-placeholder-bg][data-placeholder-en]').forEach(element => {
+        element.placeholder = element.dataset[language === 'bg' ? 'placeholderBg' : 'placeholderEn'];
     });
     document.querySelectorAll('[data-lang]').forEach(element => {
         element.classList.toggle('active', element.dataset.lang === language);
@@ -28,20 +58,6 @@ document.querySelectorAll('.faq-question').forEach(button => {
         button.setAttribute('aria-expanded', String(isOpen));
     });
 });
-
-const pageRevealElements = document.querySelectorAll('.page-reveal');
-if ('IntersectionObserver' in window) {
-    const pageObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('visible');
-            pageObserver.unobserve(entry.target);
-        });
-    }, { threshold: .12 });
-    pageRevealElements.forEach(element => pageObserver.observe(element));
-} else {
-    pageRevealElements.forEach(element => element.classList.add('visible'));
-}
 
 const galleryGrid = document.getElementById('galleryGrid');
 const galleryTemplate = document.getElementById('galleryProjectTemplate');

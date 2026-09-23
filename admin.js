@@ -1,6 +1,44 @@
 (function () {
     'use strict';
 
+    const ADMIN_PASSWORD = 'VeloraP';
+    const login = document.getElementById('adminLogin');
+    const loginForm = document.getElementById('adminLoginForm');
+    const passwordInput = document.getElementById('adminPassword');
+    const loginMessage = document.getElementById('adminLoginMessage');
+    let adminInitialized = false;
+    let activeAdminPassword = '';
+
+    function unlockAdmin() {
+        document.body.classList.remove('is-locked');
+        login.hidden = true;
+        if (!adminInitialized) {
+            adminInitialized = true;
+            initializeAdmin();
+        }
+    }
+
+    loginForm.addEventListener('submit', event => {
+        event.preventDefault();
+
+        if (passwordInput.value !== ADMIN_PASSWORD) {
+            loginMessage.textContent = 'Грешна парола. Опитай отново.';
+            passwordInput.value = '';
+            passwordInput.focus();
+            passwordInput.setAttribute('aria-invalid', 'true');
+            return;
+        }
+
+        activeAdminPassword = passwordInput.value;
+        passwordInput.value = '';
+        passwordInput.removeAttribute('aria-invalid');
+        loginMessage.textContent = '';
+        unlockAdmin();
+    });
+
+    passwordInput.focus();
+
+    function initializeAdmin() {
     const MAX_SIZE = 8 * 1024 * 1024;
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
     const form = document.getElementById('uploadForm');
@@ -14,6 +52,15 @@
     const emptyState = document.getElementById('adminEmpty');
     const projectCount = document.getElementById('projectCount');
     const template = document.getElementById('adminProjectTemplate');
+    const adminReviews = document.getElementById('adminReviews');
+    const adminReviewsEmpty = document.getElementById('adminReviewsEmpty');
+    const adminReviewMessage = document.getElementById('adminReviewMessage');
+    const adminReviewTemplate = document.getElementById('adminReviewTemplate');
+    const reviewCount = document.getElementById('reviewCount');
+    const supabaseConfig = window.VELORA_SUPABASE || {};
+    const supabaseUrl = String(supabaseConfig.url || '').replace(/\/$/, '');
+    const supabaseKey = String(supabaseConfig.publishableKey || '');
+    const supabaseReady = /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(supabaseUrl) && supabaseKey.length > 20;
     let selectedFile = null;
     let previewUrl = null;
     let renderedUrls = [];
@@ -70,6 +117,93 @@
 
     function formatDate(timestamp) {
         return new Intl.DateTimeFormat('bg-BG', { day: '2-digit', month: 'short', year: 'numeric' }).format(timestamp);
+    }
+
+    function supabaseHeaders(extra = {}) {
+        const headers = { apikey: supabaseKey, ...extra };
+        if (supabaseKey.startsWith('eyJ')) headers.Authorization = `Bearer ${supabaseKey}`;
+        return headers;
+    }
+
+    async function callReviewRpc(functionName, body) {
+        const response = await fetch(`${supabaseUrl}/rest/v1/rpc/${functionName}`, {
+            method: 'POST',
+            headers: supabaseHeaders({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(body)
+        });
+        if (!response.ok) throw new Error('Supabase не успя да изпълни заявката.');
+        return response.json();
+    }
+
+    function showReviewMessage(text, isError = false) {
+        adminReviewMessage.textContent = text;
+        adminReviewMessage.classList.toggle('is-error', isError);
+    }
+
+    async function moderateReview(reviewId, action, article) {
+        if (action === 'delete' && !window.confirm('Да изтрия ли този отзив окончателно?')) return;
+        article.querySelectorAll('button').forEach(button => { button.disabled = true; });
+        showReviewMessage('Запазване…');
+
+        try {
+            await callReviewRpc('moderate_review', {
+                p_review_id: reviewId,
+                p_action: action,
+                p_admin_password: activeAdminPassword
+            });
+            await loadReviewModeration();
+            showReviewMessage(action === 'approve' ? 'Отзивът е публикуван.' : action === 'hide' ? 'Отзивът е скрит.' : 'Отзивът е изтрит.');
+        } catch (error) {
+            showReviewMessage(error.message, true);
+            article.querySelectorAll('button').forEach(button => { button.disabled = false; });
+        }
+    }
+
+    async function loadReviewModeration() {
+        if (!supabaseReady) {
+            reviewCount.textContent = '0';
+            adminReviewsEmpty.hidden = true;
+            showReviewMessage('Добави Supabase URL и Publishable key, за да управляваш мненията.', true);
+            return;
+        }
+
+        showReviewMessage('Зареждане на мненията…');
+        adminReviews.replaceChildren();
+        try {
+            const reviews = await callReviewRpc('get_reviews_for_moderation', { p_admin_password: activeAdminPassword });
+            reviewCount.textContent = reviews.length;
+            adminReviewsEmpty.hidden = reviews.length > 0;
+
+            reviews.forEach(review => {
+                const fragment = adminReviewTemplate.content.cloneNode(true);
+                const article = fragment.querySelector('.admin-review');
+                const status = fragment.querySelector('.admin-review-status');
+                const time = fragment.querySelector('time');
+                const approveButton = fragment.querySelector('.approve-review');
+                const hideButton = fragment.querySelector('.hide-review');
+                const removeButton = fragment.querySelector('.remove-review');
+
+                status.textContent = review.approved ? 'ПУБЛИКУВАН' : 'ЧАКА ОДОБРЕНИЕ';
+                status.classList.toggle('is-approved', review.approved);
+                time.dateTime = new Date(review.created_at).toISOString();
+                time.textContent = formatDate(new Date(review.created_at));
+                fragment.querySelector('blockquote').textContent = review.comment;
+                fragment.querySelector('.admin-review-avatar').textContent = review.name.trim().charAt(0).toLocaleUpperCase('bg');
+                fragment.querySelector('.admin-review-person b').textContent = review.name;
+                fragment.querySelector('.admin-review-person span').textContent = review.project_type;
+                fragment.querySelector('.admin-review-likes b').textContent = Number(review.likes_count) || 0;
+                approveButton.hidden = review.approved;
+                hideButton.hidden = !review.approved;
+                approveButton.addEventListener('click', () => moderateReview(review.id, 'approve', article));
+                hideButton.addEventListener('click', () => moderateReview(review.id, 'hide', article));
+                removeButton.addEventListener('click', () => moderateReview(review.id, 'delete', article));
+                adminReviews.appendChild(fragment);
+            });
+            showReviewMessage('');
+        } catch (error) {
+            adminReviewsEmpty.hidden = true;
+            showReviewMessage(error.message, true);
+        }
     }
 
     async function renderProjects() {
@@ -155,4 +289,6 @@
     });
 
     renderProjects();
+    loadReviewModeration();
+    }
 }());

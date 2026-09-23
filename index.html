@@ -15,6 +15,19 @@
 </head>
 
 <body class="home-page">
+    <div class="site-intro" id="siteIntro" role="dialog" aria-modal="true" aria-labelledby="siteIntroTitle" hidden>
+        <div class="site-intro-glow" aria-hidden="true"></div>
+        <div class="site-intro-film" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="site-intro-content">
+            <span class="site-intro-kicker">ДОБРЕ ДОШЛИ В</span>
+            <img class="site-intro-logo" src="velora-protect-logo-transparent.png" alt="Velora Protect">
+            <h1 id="siteIntroTitle">Защита, която<br><em>запазва визията</em></h1>
+            <p>Професионално защитно фолио за интериорни повърхности.</p>
+            <div class="site-intro-progress" aria-hidden="true"><span></span></div>
+            <button class="site-intro-enter" id="siteIntroEnter" type="button"><span>Влез в сайта</span><b aria-hidden="true">→</b></button>
+        </div>
+        <span class="site-intro-index" aria-hidden="true">VELORA / 01</span>
+    </div>
     <header class="header">
         <div class="wrap nav"><a class="logo header-logo" href="#top" aria-label="Velora Protect — начало"><span
                     class="brand-mark" aria-hidden="true"><img src="velora-protect-logo-transparent.png"
@@ -22,9 +35,9 @@
                         src="velora-protect-logo-transparent.png" alt=""></span><span
                     class="visually-hidden">Velora Protect</span></a>
             <nav class="navlinks" id="nav"><a href="#surfaces" data-i18n="navSurfaces">Повърхности</a><a href="#process"
-                    data-i18n="navProcess">Процес</a><a href="gallery.html" data-i18n="navGallery">Галерия</a><a
+                    data-i18n="navProcess">Процес</a><a href="gallery.html" data-i18n="navGallery">Галерия</a><a class="desktop-guides-link" href="guides.html" data-i18n="navGuides">Полезно</a><a
                     href="about.html" data-i18n="navAbout">За нас</a><a href="faq.html"
-                    data-i18n="navFAQ">Въпроси</a><a href="#quote"
+                    data-i18n="navFAQ">Въпроси</a><a href="reviews.html" data-i18n="navReview">Остави мнение</a><a href="#quote"
                     data-i18n="navContact">Контакт</a></nav>
             <div class="header-tools">
                 <div class="socials"><a class="social-link facebook" href="https://www.facebook.com/" target="_blank"
@@ -48,7 +61,7 @@
             <div class="wrap">
                 <div class="content">
                     <div class="eyebrow">PROTECTIVE SURFACE FILM</div>
-                    <h1 data-i18n="heroTitle">Защити повърхността.<br><em>Запази визията.</em></h1>
+                    <h1 data-i18n="heroTitle">Защити повърхността<br><em>Запази визията</em></h1>
                     <p class="lead" data-i18n="heroLead">Професионално поставяне на <b>матово</b> и <b>прозрачно защитно
                             фолио</b> за маси, барове, плотове и други интериорни повърхности.</p>
                     <img class="hero-mobile-photo" src="hero-velora-protect.png"
@@ -65,7 +78,7 @@
         <section class="section light" id="surfaces">
             <div class="wrap">
                 <div class="eyebrow" data-i18n="usesEyebrow">КЪДЕ СЕ ИЗПОЛЗВА</div>
-                <h2 data-i18n="usesTitle">За повърхности, които<br><em>се използват всеки ден.</em></h2>
+                <h2 data-i18n="usesTitle">За повърхности, които<br><em>се използват всеки ден</em></h2>
                 <p class="copy" data-i18n="usesCopy">Работим върху подходящи гладки интериорни повърхности. Преди монтаж
                     преценяваме състоянието и дали конкретният материал е подходящ за фолиране.</p>
                 <div class="use-grid">
@@ -99,7 +112,7 @@
         <section class="section films-section" id="films">
             <div class="wrap">
                 <div class="eyebrow" data-i18n="filmsEyebrow">ИЗБЕРИ ПОКРИТИЕ</div>
-                <h2 data-i18n="filmsTitle">Два финиша.<br><em>Една цел — защита.</em></h2>
+                <h2 data-i18n="filmsTitle">Два финиша<br><em>Една цел — защита</em></h2>
                 <p class="copy" data-i18n="filmsCopy">Изборът между матово и прозрачно фолио зависи от оригиналната
                     повърхност, светлината и ефекта, който искаш да запазиш.</p>
                 <div class="two-films">
@@ -139,7 +152,7 @@
                     </div>
                     <div class="compare-copy">
                         <div class="eyebrow" data-i18n="compareEyebrow">СРАВНИ ФИНИША</div>
-                        <h2 data-i18n="compareTitle">Плъзни и виж<br><em>разликата.</em></h2>
+                        <h2 data-i18n="compareTitle">Плъзни и виж<br><em>разликата</em></h2>
                         <p class="copy" data-i18n="compareCopy">Интерактивният пример показва как матовият ефект
                             омекотява отраженията, докато прозрачният запазва повече блясък.</p>
                         <ul>
@@ -151,10 +164,80 @@
                 </div>
             </div>
         </section>
+        <section class="section benefits-section" id="benefits">
+            <div class="wrap">
+                <div class="eyebrow" data-i18n="benefitsEyebrow">КАКВО ПОЛУЧАВАШ</div>
+                <h2 data-i18n="benefitsTitle">Повече спокойствие<br><em>По-малко следи от ежедневието</em></h2>
+                <p class="copy" data-i18n="benefitsCopy">Защитното фолио помага на натоварените повърхности да запазят добрия си вид и да се поддържат по-лесно.</p>
+
+                <div class="benefits-grid">
+                    <article class="benefit-card">
+                        <span class="benefit-number">01</span>
+                        <h3 data-i18n="benefitProtectTitle">Ежедневна защита</h3>
+                        <p data-i18n="benefitProtectCopy">Допълнителен защитен слой срещу леки драскотини, петна и следи от употреба.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-number">02</span>
+                        <h3 data-i18n="benefitCleanTitle">По-лесна поддръжка</h3>
+                        <p data-i18n="benefitCleanCopy">Гладката повърхност се почиства бързо и е удобна за натоварени домашни и търговски зони.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-number">03</span>
+                        <h3 data-i18n="benefitLookTitle">Запазена визия</h3>
+                        <p data-i18n="benefitLookCopy">Избираш матов или прозрачен финиш според материала, светлината и желания ефект.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-number">04</span>
+                        <h3 data-i18n="benefitFitTitle">Прецизно напасване</h3>
+                        <p data-i18n="benefitFitCopy">Всеки проект се преценява индивидуално за чисти ръбове и завършен резултат.</p>
+                    </article>
+                </div>
+
+                <div class="quote-prep">
+                    <div class="quote-prep-copy">
+                        <div class="eyebrow" data-i18n="prepEyebrow">ЗА ПО-БЪРЗА ОФЕРТА</div>
+                        <h3 data-i18n="quotePrepTitle">Подготви три неща</h3>
+                        <p data-i18n="quotePrepCopy">Тази информация ни помага да преценим повърхността и проекта още при първия контакт.</p>
+                    </div>
+                    <ol class="prep-list">
+                        <li><span>1</span><b data-i18n="prepPhoto">Снимки отблизо и отдалеч</b></li>
+                        <li><span>2</span><b data-i18n="prepSize">Приблизителни размери</b></li>
+                        <li><span>3</span><b data-i18n="prepFinish">Матов или прозрачен финиш</b></li>
+                    </ol>
+                    <a class="prep-cta" href="#quote" data-i18n="prepButton">Изпрати запитване →</a>
+                </div>
+            </div>
+        </section>
+        <section class="section community-section" id="about-preview">
+            <div class="wrap">
+                <div class="team-showcase">
+                    <div class="team-profile">
+                        <div class="team-avatar" aria-hidden="true">VP</div>
+                        <div>
+                            <span class="team-status"><i></i><span data-i18n="teamStatus">НА ЛИНИЯ ЗА НОВИ ПРОЕКТИ</span></span>
+                            <h3>Velora Protect</h3>
+                            <p data-i18n="teamRole">Екип за професионален монтаж на защитно фолио</p>
+                        </div>
+                    </div>
+                    <div class="team-copy">
+                        <div class="eyebrow" data-i18n="teamEyebrow">КОИ СМЕ НИЕ</div>
+                        <h2 data-i18n="teamTitle">Малък екип<br><em>Голямо внимание към детайла</em></h2>
+                        <p data-i18n="teamCopy">Подхождаме лично към всеки проект — от първата снимка и избора на финиш до подготовката и чистия монтаж на място.</p>
+                        <div class="team-points">
+                            <span data-i18n="teamPoint1">Честна предварителна оценка</span>
+                            <span data-i18n="teamPoint2">Прецизна подготовка</span>
+                            <span data-i18n="teamPoint3">Грижа за интериора</span>
+                        </div>
+                        <a class="team-link" href="about.html" data-i18n="teamLink">Научи повече за нас →</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
         <section class="section" id="process" style="background:#0f110f">
             <div class="wrap">
                 <div class="eyebrow" data-i18n="processEyebrow">ПРОЦЕС</div>
-                <h2 data-i18n="processTitle">Лесно. Чисто.<br><em>Без излишно усложняване.</em></h2>
+                <h2 data-i18n="processTitle">Лесно Чисто<br><em>Без излишно усложняване</em></h2>
                 <div class="process">
                     <div class="step">
                         <div class="num">01</div>
@@ -177,10 +260,79 @@
                         <p data-i18n="installCopy">Фолиото се поставя внимателно за чист и завършен резултат.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="section community-section reviews-section" id="reviews">
+            <div class="wrap">
+                <div class="reviews-heading">
+                    <div class="eyebrow" data-i18n="reviewsEyebrow">МНЕНИЯ И ИСТОРИИ</div>
+                    <h2 data-i18n="reviewsTitle">Какво остава<br><em>след добрия монтаж</em></h2>
+                    <p class="copy" data-i18n="reviewsCopy">Прочети споделените впечатления от завършени проекти или добави своето мнение на отделната страница.</p>
+                    <a class="reviews-write-link" href="reviews.html" data-i18n="reviewsWriteLink">Остави мнение →</a>
+                </div>
+                <div class="reviews-grid" id="reviewsGrid" tabindex="0" aria-label="Плъзгащи се клиентски мнения">
+                    <article class="review-card">
+                        <span class="review-label" data-i18n="sampleReview">ПРИМЕРЕН ОТЗИВ</span>
+                        <div class="review-quote" aria-hidden="true">“</div>
+                        <blockquote data-i18n="reviewHomeText">Плотът запази естествения си вид, а почистването вече е много по-лесно. Резултатът е дискретен и чист.</blockquote>
+                        <div class="review-profile">
+                            <div class="review-avatar" aria-hidden="true">Д</div>
+                            <div><b data-i18n="reviewHomeName">Домашен проект</b><span data-i18n="reviewHomeRole">Кухненски плот</span></div>
+                        </div>
+                    </article>
+                    <article class="review-card">
+                        <span class="review-label" data-i18n="sampleReview">ПРИМЕРЕН ОТЗИВ</span>
+                        <div class="review-quote" aria-hidden="true">“</div>
+                        <blockquote data-i18n="reviewBusinessText">Работата беше организирана и без излишно прекъсване. Повърхността изглежда завършена и готова за ежедневно натоварване.</blockquote>
+                        <div class="review-profile">
+                            <div class="review-avatar" aria-hidden="true">Б</div>
+                            <div><b data-i18n="reviewBusinessName">Бизнес пространство</b><span data-i18n="reviewBusinessRole">Бар и работна зона</span></div>
+                        </div>
+                    </article>
+                    <article class="review-card">
+                        <span class="review-label" data-i18n="sampleReview">ПРИМЕРЕН ОТЗИВ</span>
+                        <div class="review-quote" aria-hidden="true">“</div>
+                        <blockquote data-i18n="reviewOfficeText">Получихме ясна препоръка за финиша и точна предварителна оценка. Монтажът се вписа естествено в интериора.</blockquote>
+                        <div class="review-profile">
+                            <div class="review-avatar" aria-hidden="true">О</div>
+                            <div><b data-i18n="reviewOfficeName">Офис проект</b><span data-i18n="reviewOfficeRole">Маса в заседателна зала</span></div>
+                        </div>
+                    </article>
+                    <article class="review-card">
+                        <span class="review-label" data-i18n="sampleReview">ПРИМЕРЕН ОТЗИВ</span>
+                        <div class="review-quote" aria-hidden="true">“</div>
+                        <blockquote data-i18n="reviewRetailText">Рецепцията изглежда като нова, без да променя оригиналния си цвят. Монтажът беше бърз и много чист.</blockquote>
+                        <div class="review-profile">
+                            <div class="review-avatar" aria-hidden="true">Т</div>
+                            <div><b data-i18n="reviewRetailName">Търговски обект</b><span data-i18n="reviewRetailRole">Рецепция и плот</span></div>
+                        </div>
+                    </article>
+                </div>
+                <div class="reviews-slider-controls" id="reviewsSliderControls" aria-label="Управление на мненията">
+                    <button class="reviews-slider-arrow" id="reviewsPrev" type="button" aria-label="Предишни мнения">←</button>
+                    <div class="reviews-slider-dots" id="reviewsDots" aria-label="Страници с мнения"></div>
+                    <button class="reviews-slider-arrow" id="reviewsNext" type="button" aria-label="Следващи мнения">→</button>
+                </div>
+                <template id="reviewCardTemplate">
+                    <article class="review-card user-review">
+                        <span class="review-label"></span>
+                        <div class="review-quote" aria-hidden="true">“</div>
+                        <blockquote></blockquote>
+                        <div class="review-profile">
+                            <div class="review-avatar" aria-hidden="true"></div>
+                            <div><b></b><span></span></div>
+                        </div>
+                        <button class="review-like" type="button"><span aria-hidden="true">☆☆☆☆☆☆</span><b>0</b></button>
+                    </article>
+                </template>
+            </div>
+        </section>
+        <section class="section contact-form-section" style="background:#0f110f">
+            <div class="wrap">
                 <div class="quote-box" id="quote">
                     <div>
                         <div class="eyebrow" data-i18n="quoteEyebrow">ИСКАШ ОФЕРТА?</div>
-                        <h3 data-i18n="quoteTitle">Изпрати снимка<br><em>на повърхността.</em>
+                        <h3 data-i18n="quoteTitle">Изпрати снимка<br><em>на повърхността</em>
                         </h3>
                         <p class="copy" data-i18n="quoteCopy">Напиши приблизителни размери и кой вариант предпочиташ —
                             матово или прозрачно. Така ще можем да преценим проекта по-точно.</p>
@@ -238,6 +390,7 @@
             <a href="#top" data-i18n="backToTop">Обратно нагоре ↑</a>
         </div>
     </footer>
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
 </body>
 

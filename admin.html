@@ -12,7 +12,21 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="admin.css">
 </head>
-<body class="admin-page">
+<body class="admin-page is-locked">
+    <section class="admin-login" id="adminLogin" aria-labelledby="adminLoginTitle">
+        <form class="admin-login-card" id="adminLoginForm">
+            <img src="velora-protect-logo-transparent.png" alt="Velora Protect">
+            <div class="eyebrow">ЗАЩИТЕНА ЗОНА</div>
+            <h1 id="adminLoginTitle">Вход в <em>админ панела</em></h1>
+            <p>Въведи паролата, за да продължиш.</p>
+            <label for="adminPassword">Парола</label>
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" required autofocus>
+            <div class="admin-login-message" id="adminLoginMessage" role="alert" aria-live="polite"></div>
+            <button type="submit">Влез <span aria-hidden="true">→</span></button>
+            <a href="index.html">← Обратно към сайта</a>
+        </form>
+    </section>
+
     <header class="admin-header">
         <div class="admin-wrap admin-nav">
             <a class="admin-brand" href="index.html" aria-label="Velora Protect — начало">
@@ -27,7 +41,7 @@
             <section class="admin-intro">
                 <div>
                     <div class="eyebrow">VELORA PROTECT</div>
-                    <h1>Управление на <em>галерията.</em></h1>
+                    <h1>Управление на <em>галерията</em></h1>
                     <p>Добавяй завършени проекти, които ще се покажат автоматично в публичната галерия.</p>
                 </div>
                 <div class="storage-note"><span aria-hidden="true">i</span><p><strong>Локален режим</strong>Снимките са видими в този браузър и на това устройство.</p></div>
@@ -69,6 +83,17 @@
                     </div>
                 </section>
             </div>
+
+            <section class="admin-card admin-reviews-card">
+                <div class="card-heading"><span>03</span><div><h2>Клиентски мнения</h2><p><b id="reviewCount">0</b> изпратени мнения · одобрявай само реалните</p></div></div>
+                <div class="admin-review-message" id="adminReviewMessage" role="status" aria-live="polite"></div>
+                <div class="admin-reviews" id="adminReviews"></div>
+                <div class="admin-empty" id="adminReviewsEmpty">
+                    <span aria-hidden="true">♡</span>
+                    <h3>Все още няма изпратени мнения</h3>
+                    <p>Новите коментари ще се появяват тук за одобрение.</p>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -80,6 +105,23 @@
         </article>
     </template>
 
+    <template id="adminReviewTemplate">
+        <article class="admin-review">
+            <div class="admin-review-top"><span class="admin-review-status"></span><time></time></div>
+            <blockquote></blockquote>
+            <div class="admin-review-bottom">
+                <div class="admin-review-person"><div class="admin-review-avatar" aria-hidden="true"></div><div><b></b><span></span></div></div>
+                <div class="admin-review-likes">♡ <b>0</b></div>
+            </div>
+            <div class="admin-review-actions">
+                <button class="approve-review" type="button">Одобри</button>
+                <button class="hide-review" type="button">Скрий</button>
+                <button class="remove-review" type="button">Изтрий</button>
+            </div>
+        </article>
+    </template>
+
+    <script src="supabase-config.js"></script>
     <script src="gallery-store.js"></script>
     <script src="admin.js"></script>
 </body>

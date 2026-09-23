@@ -9,6 +9,131 @@
     color: #f4eee5
 }
 
+.admin-page.is-locked {
+    overflow: hidden
+}
+
+.admin-page.is-locked > .admin-header,
+.admin-page.is-locked > .admin-main {
+    display: none
+}
+
+.admin-login {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 0, rgba(215, 187, 143, .14), transparent 38%), #090a09
+}
+
+.admin-login[hidden] {
+    display: none
+}
+
+.admin-login-card {
+    width: min(100%, 430px);
+    padding: 38px;
+    border: 1px solid rgba(234, 217, 189, .18);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .018));
+    box-shadow: 0 28px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .05)
+}
+
+.admin-login-card > img {
+    width: 170px;
+    height: 92px;
+    margin: -25px auto 8px;
+    object-fit: cover;
+    object-position: center 38%
+}
+
+.admin-login-card .eyebrow {
+    text-align: center
+}
+
+.admin-login-card h1 {
+    margin: 12px 0 10px;
+    font: 400 clamp(32px, 7vw, 46px)/1.06 var(--font-display);
+    text-align: center;
+    letter-spacing: -.035em
+}
+
+.admin-login-card h1 em {
+    color: #d8ad76;
+    font-weight: 400
+}
+
+.admin-login-card > p {
+    margin: 0 0 28px;
+    color: #969891;
+    text-align: center;
+    font-size: 14px
+}
+
+.admin-login-card label {
+    display: block;
+    margin-bottom: 8px;
+    color: #b7b2a9;
+    font-size: 12px;
+    font-weight: 700
+}
+
+.admin-login-card input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid rgba(234, 217, 189, .22);
+    border-radius: 11px;
+    outline: 0;
+    background: rgba(255, 255, 255, .04);
+    color: #f4eee5;
+    padding: 0 15px;
+    transition: border-color .2s, box-shadow .2s
+}
+
+.admin-login-card input:focus {
+    border-color: #d7bb8f;
+    box-shadow: 0 0 0 3px rgba(215, 187, 143, .1)
+}
+
+.admin-login-card input[aria-invalid="true"] {
+    border-color: #c98780
+}
+
+.admin-login-message {
+    min-height: 20px;
+    margin: 8px 0 7px;
+    color: #ef9e96;
+    font-size: 12px
+}
+
+.admin-login-card button {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #f0dfc1, #cda873);
+    color: #151515;
+    padding: 0 18px;
+    font-weight: 800;
+    cursor: pointer
+}
+
+.admin-login-card > a {
+    display: block;
+    width: max-content;
+    margin: 20px auto 0;
+    color: #8f918a;
+    font-size: 12px;
+    transition: color .2s
+}
+
+.admin-login-card > a:hover {
+    color: #e1c493
+}
+
 .admin-wrap {
     width: min(1180px, calc(100% - 40px));
     margin: 0 auto
@@ -406,6 +531,149 @@
     display: none
 }
 
+.admin-reviews-card {
+    margin-top: 22px
+}
+
+.admin-review-message {
+    min-height: 20px;
+    margin: -8px 0 14px;
+    color: #c8a978;
+    font-size: 12px
+}
+
+.admin-review-message.is-error {
+    color: #ef9e96
+}
+
+.admin-reviews {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px
+}
+
+.admin-review {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid rgba(234, 217, 189, .14);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, .18)
+}
+
+.admin-review-top,
+.admin-review-bottom,
+.admin-review-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px
+}
+
+.admin-review-status {
+    padding: 5px 8px;
+    border: 1px solid rgba(220, 176, 105, .34);
+    border-radius: 999px;
+    color: #d7bb8f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .08em
+}
+
+.admin-review-status.is-approved {
+    border-color: rgba(143, 183, 127, .4);
+    color: #a8d099
+}
+
+.admin-review time {
+    color: #70736c;
+    font-size: 10px
+}
+
+.admin-review blockquote {
+    min-height: 72px;
+    margin: 18px 0;
+    color: #d6d0c6;
+    font-size: 13px;
+    line-height: 1.7
+}
+
+.admin-review-person {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.admin-review-avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #dac29c, #997649);
+    color: #171611;
+    font-weight: 800
+}
+
+.admin-review-person b,
+.admin-review-person span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.admin-review-person b {
+    color: #eee5d8;
+    font-size: 12px
+}
+
+.admin-review-person span {
+    color: #74766f;
+    font-size: 10px
+}
+
+.admin-review-likes {
+    color: #d7bb8f;
+    font-size: 13px
+}
+
+.admin-review-actions {
+    justify-content: flex-start;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(234, 217, 189, .1)
+}
+
+.admin-review-actions button {
+    min-height: 34px;
+    border: 1px solid rgba(215, 187, 143, .22);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .025);
+    color: #c8c1b7;
+    padding: 0 11px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.admin-review-actions button:hover {
+    border-color: #d7bb8f;
+    color: #f0dfc1
+}
+
+.admin-review-actions .remove-review {
+    margin-left: auto;
+    border-color: rgba(239, 158, 150, .22);
+    color: #d28f88
+}
+
+.admin-review-actions button:disabled {
+    opacity: .5;
+    cursor: wait
+}
+
 @media(max-width:850px) {
     .admin-intro {
         align-items: flex-start;
@@ -415,9 +683,21 @@
     .admin-layout {
         grid-template-columns: 1fr
     }
+
+    .admin-reviews {
+        grid-template-columns: 1fr
+    }
 }
 
 @media(max-width:560px) {
+    .admin-login {
+        padding: 14px
+    }
+
+    .admin-login-card {
+        padding: 30px 22px
+    }
+
     .admin-wrap {
         width: min(100% - 28px, 1180px)
     }
