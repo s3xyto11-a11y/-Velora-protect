@@ -245,6 +245,93 @@
     font-size: 13px
 }
 
+.folder-manager {
+    margin-bottom: 24px;
+}
+
+.folder-breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+    overflow-wrap: anywhere;
+}
+
+.folder-breadcrumbs button {
+    padding: 7px 10px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: transparent;
+    color: #c9b391;
+    font: inherit;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.folder-breadcrumbs button[aria-current] {
+    background: rgba(215, 187, 143, .1);
+    color: #f4eee5;
+}
+
+.folder-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 14px;
+}
+
+.folder-form .admin-field {
+    flex: 1 1 240px;
+    margin: 0;
+}
+
+.folder-form .admin-submit {
+    width: auto;
+    margin: 0;
+}
+
+.folder-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 12px;
+}
+
+.folder-button {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    background: rgba(215, 187, 143, .045);
+    color: #f4eee5;
+    font: inherit;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.folder-button:hover {
+    border-color: #d7bb8f;
+    background: rgba(215, 187, 143, .1);
+}
+
+.folder-button span:first-child {
+    font-size: 32px;
+    color: #d7bb8f;
+}
+
+.folder-hint {
+    color: #a8a69d;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.folder-hint strong {
+    color: #d7bb8f;
+}
+
 .admin-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);

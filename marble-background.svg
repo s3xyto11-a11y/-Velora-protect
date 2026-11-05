@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="stone" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".006 .018" numOctaves="4" seed="14" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues=".82 .91 .97 .99 1"/>
+        <feFuncG type="table" tableValues=".75 .85 .93 .97 1"/>
+        <feFuncB type="table" tableValues=".63 .75 .86 .93 .98"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="veins" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency=".009 .016" numOctaves="3" seed="8" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="95" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation=".8"/>
+    </filter>
+    <linearGradient id="wash" x2="1" y2="1">
+      <stop stop-color="#fff" stop-opacity=".3"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#e6cfaa" stop-opacity=".2"/>
+    </linearGradient>
+  </defs>
+  <path fill="#f6f0e5" d="M0 0h1600v1200H0z"/>
+  <path filter="url(#stone)" opacity=".65" d="M0 0h1600v1200H0z"/>
+  <g fill="none" stroke="#b08a50" filter="url(#veins)">
+    <g stroke-width="16" opacity=".07">
+      <path d="M170-100 280 170 240 350 410 610 460 840 650 1300M900-100 850 160 1050 410 1030 630 1200 860 1260 1300"/>
+    </g>
+    <g stroke-width="2" opacity=".23">
+      <path d="M170-100 280 170 240 350 410 610 460 840 650 1300M900-100 850 160 1050 410 1030 630 1200 860 1260 1300M-80 660 180 760 460 840M1050 410 1240 340 1500 450 1680 400"/>
+    </g>
+    <g stroke-width="1" opacity=".16">
+      <path d="M280 170 470 220 620 430 880 510 1030 630M410 610 290 960 340 1250M1200 860 1470 950 1660 1170M-60 100 90 250 240 350M850 160 1150 30 1330-70"/>
+    </g>
+  </g>
+  <path fill="url(#wash)" d="M0 0h1600v1200H0z"/>
+</svg>

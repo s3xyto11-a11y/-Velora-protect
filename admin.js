@@ -64,6 +64,82 @@
     let selectedFile = null;
     let previewUrl = null;
     let renderedUrls = [];
+    let currentFolderId = null;
+    let galleryRenderVersion = 0;
+    const folderForm = document.getElementById('folderForm');
+    const folderList = document.getElementById('folderList');
+    const breadcrumbs = document.getElementById('folderBreadcrumbs');
+    const folderMessage = document.getElementById('folderMessage');
+
+    function openFolder(id) {
+        currentFolderId = id;
+        folderMessage.textContent = '';
+        showMessage('');
+        renderProjects();
+    }
+
+    function renderFolders(folders) {
+        const path = [];
+        const visited = new Set();
+        let folder = folders.find(item => item.id === currentFolderId);
+        while (folder && !visited.has(folder.id)) {
+            visited.add(folder.id);
+            path.unshift(folder);
+            folder = folders.find(item => item.id === folder.parentId);
+        }
+        breadcrumbs.replaceChildren();
+        [{ id: null, name: 'Галерия' }, ...path].forEach((item, index, items) => {
+            if (index) {
+                const separator = document.createElement('span');
+                separator.textContent = ' / ';
+                separator.setAttribute('aria-hidden', 'true');
+                breadcrumbs.appendChild(separator);
+            }
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = item.name;
+            if (index === items.length - 1) button.setAttribute('aria-current', 'location');
+            button.addEventListener('click', () => openFolder(item.id));
+            breadcrumbs.appendChild(button);
+        });
+        document.getElementById('uploadFolderPath').textContent = ['Галерия', ...path.map(item => item.name)].join(' / ');
+        folderList.replaceChildren();
+        const children = folders.filter(item => (item.parentId || null) === currentFolderId)
+            .sort((a, b) => a.name.localeCompare(b.name, 'bg'));
+        document.getElementById('foldersEmpty').hidden = children.length > 0;
+        children.forEach(item => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'folder-button';
+            const icon = document.createElement('span');
+            icon.textContent = '▱';
+            icon.setAttribute('aria-hidden', 'true');
+            const label = document.createElement('span');
+            label.textContent = item.name;
+            button.append(icon, label);
+            button.addEventListener('click', () => openFolder(item.id));
+            folderList.appendChild(button);
+        });
+    }
+
+    folderForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const button = folderForm.querySelector('button');
+        button.disabled = true;
+        folderMessage.textContent = '';
+        folderMessage.classList.remove('is-error');
+        try {
+            await window.VeloraGallery.addFolder(folderForm.elements.folderName.value, currentFolderId);
+            folderForm.reset();
+            await renderProjects();
+            folderMessage.textContent = 'Папката е създадена. Отвори я, за да добавиш подпапки или снимки.';
+        } catch (error) {
+            folderMessage.textContent = error.message;
+            folderMessage.classList.add('is-error');
+        } finally {
+            button.disabled = false;
+        }
+    });
 
     function showMessage(text, isError = false) {
         message.textContent = text;
@@ -207,12 +283,19 @@
     }
 
     async function renderProjects() {
-        renderedUrls.forEach(url => URL.revokeObjectURL(url));
-        renderedUrls = [];
-        projectsContainer.replaceChildren();
+        const renderVersion = ++galleryRenderVersion;
+        const folderId = currentFolderId;
 
         try {
-            const projects = await window.VeloraGallery.getAll();
+            const [allProjects, folders] = await Promise.all([
+                window.VeloraGallery.getAll(), window.VeloraGallery.getFolders()
+            ]);
+            if (renderVersion !== galleryRenderVersion) return;
+            renderFolders(folders);
+            renderedUrls.forEach(url => URL.revokeObjectURL(url));
+            renderedUrls = [];
+            projectsContainer.replaceChildren();
+            const projects = allProjects.filter(project => (project.folderId || null) === folderId);
             projectCount.textContent = projects.length;
             emptyState.hidden = projects.length > 0;
 
@@ -271,7 +354,7 @@
         submitButton.disabled = true;
         showMessage('Снимката се добавя…');
         try {
-            await window.VeloraGallery.add({ image: selectedFile, title, category, alt });
+            await window.VeloraGallery.add({ image: selectedFile, title, category, alt, folderId: currentFolderId });
             form.reset();
             clearPreview();
             await renderProjects();

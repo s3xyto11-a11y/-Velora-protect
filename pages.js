@@ -4,7 +4,12 @@ const pageLanguageToggle = document.getElementById('languageToggle');
 let pageLanguage = 'bg';
 
 if (pageNav && !pageNav.querySelector('a[href="guides.html"]')) {
-    pageNav.querySelector('a[href="gallery.html"]')?.insertAdjacentHTML('afterend', '<a class="desktop-guides-link" href="guides.html" data-bg="Полезно" data-en="Guides">Полезно</a>');
+    pageNav.querySelector('a[href="process.html"]')?.insertAdjacentHTML('afterend', '<a class="desktop-guides-link" href="guides.html" data-bg="Фолиа" data-en="Films">Фолиа</a>');
+}
+
+
+if (pageNav && !pageNav.querySelector('a[href="useful.html"]')) {
+    pageNav.querySelector('a[href="guides.html"]')?.insertAdjacentHTML('afterend', '<a href="useful.html" data-bg="Полезно" data-en="Useful">Полезно</a>');
 }
 
 if (pageMenu && pageNav) {
@@ -67,14 +72,10 @@ if (galleryGrid && galleryTemplate && window.VeloraGallery) {
         projects.forEach(project => {
             const fragment = galleryTemplate.content.cloneNode(true);
             const image = fragment.querySelector('img');
-            const category = fragment.querySelector('span');
-            const title = fragment.querySelector('h3');
             const imageUrl = URL.createObjectURL(project.image);
             galleryUrls.push(imageUrl);
             image.src = imageUrl;
             image.alt = project.alt || project.title;
-            category.textContent = project.category;
-            title.textContent = project.title;
             galleryGrid.appendChild(fragment);
         });
     }).catch(() => {

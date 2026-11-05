@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="bg">
-<head>
+<head><link rel="icon" type="image/png" href="favicon.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0b">
@@ -44,12 +44,25 @@
                     <h1>Управление на <em>галерията</em></h1>
                     <p>Добавяй завършени проекти, които ще се покажат автоматично в публичната галерия.</p>
                 </div>
-                <div class="storage-note"><span aria-hidden="true">i</span><p><strong>Локален режим</strong>Снимките са видими в този браузър и на това устройство.</p></div>
+                <div class="storage-note"><span aria-hidden="true">i</span><p><strong>Локален режим</strong>Папките и снимките се пазят в този браузър и на това устройство.</p></div>
+            </section>
+
+            <section class="admin-card folder-manager" aria-labelledby="foldersTitle">
+                <div class="card-heading"><span aria-hidden="true">◇</span><div><h2 id="foldersTitle">Папки в галерията</h2><p>Създай категория, отвори я и добави подпапки за отделните обекти.</p></div></div>
+                <nav id="folderBreadcrumbs" class="folder-breadcrumbs" aria-label="Път до текущата папка"></nav>
+                <form id="folderForm" class="folder-form">
+                    <label class="admin-field"><span>Нова папка в текущото място</span><input name="folderName" maxlength="80" placeholder="напр. Апартаменти или Обект 1" required></label>
+                    <button class="admin-submit" type="submit">Създай папка +</button>
+                </form>
+                <div id="folderMessage" class="form-message" role="status" aria-live="polite"></div>
+                <div id="folderList" class="folder-list"></div>
+                <p id="foldersEmpty" class="folder-hint" hidden>Тук още няма подпапки. Създай нова папка или добави снимки по-долу.</p>
             </section>
 
             <div class="admin-layout">
                 <section class="admin-card upload-card">
-                    <div class="card-heading"><span>01</span><div><h2>Нов проект</h2><p>Качи снимка и добави кратко описание.</p></div></div>
+                    <div class="card-heading"><span>01</span><div><h2>Нова снимка</h2><p>Качи снимка и добави кратко описание.</p></div></div>
+                    <p class="folder-hint">Добавяне в: <strong id="uploadFolderPath">Галерия</strong></p>
                     <form id="uploadForm" novalidate>
                         <label class="drop-zone" id="dropZone" for="imageInput">
                             <input id="imageInput" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
@@ -74,7 +87,7 @@
                 </section>
 
                 <section class="admin-card projects-card">
-                    <div class="card-heading"><span>02</span><div><h2>Добавени проекти</h2><p><b id="projectCount">0</b> снимки, добавени през панела</p></div></div>
+                    <div class="card-heading"><span>02</span><div><h2>Снимки в тази папка</h2><p><b id="projectCount">0</b> снимки в текущата папка</p></div></div>
                     <div class="admin-projects" id="adminProjects" aria-live="polite"></div>
                     <div class="admin-empty" id="adminEmpty">
                         <span aria-hidden="true">◇</span>
