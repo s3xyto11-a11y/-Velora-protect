@@ -19,7 +19,7 @@ if (pageMenu && pageNav) {
     const setPageMenuOpen = isOpen => {
         pageNav.classList.toggle('open', isOpen);
         pageMenu.setAttribute('aria-expanded', String(isOpen));
-        pageMenu.setAttribute('aria-label', isOpen ? 'Затвори менюто' : 'Отвори менюто');
+        pageMenu.setAttribute('aria-label', isOpen ? 'Затворете менюто' : 'Отворете менюто');
     };
 
     pageMenu.addEventListener('click', event => {

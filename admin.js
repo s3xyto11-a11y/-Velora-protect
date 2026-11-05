@@ -22,7 +22,7 @@
         event.preventDefault();
 
         if (passwordInput.value !== ADMIN_PASSWORD) {
-            loginMessage.textContent = 'Грешна парола. Опитай отново.';
+            loginMessage.textContent = 'Грешна парола. Опитайте отново.';
             passwordInput.value = '';
             passwordInput.focus();
             passwordInput.setAttribute('aria-invalid', 'true');
@@ -132,7 +132,7 @@
             await window.VeloraGallery.addFolder(folderForm.elements.folderName.value, currentFolderId);
             folderForm.reset();
             await renderProjects();
-            folderMessage.textContent = 'Папката е създадена. Отвори я, за да добавиш подпапки или снимки.';
+            folderMessage.textContent = 'Папката е създадена. Отворете я, за да добавите подпапки или снимки.';
         } catch (error) {
             folderMessage.textContent = error.message;
             folderMessage.classList.add('is-error');
@@ -160,7 +160,7 @@
         showMessage('');
         if (!file) return;
         if (!allowedTypes.includes(file.type)) {
-            showMessage('Избери JPG, PNG или WebP снимка.', true);
+            showMessage('Изберете JPG, PNG или WebP снимка.', true);
             return;
         }
         if (file.size > MAX_SIZE) {
@@ -239,7 +239,7 @@
         if (!supabaseReady) {
             reviewCount.textContent = '0';
             adminReviewsEmpty.hidden = true;
-            showReviewMessage('Добави Supabase URL и Publishable key, за да управляваш мненията.', true);
+            showReviewMessage('Добавете Supabase URL и Publishable key, за да управлявате мненията.', true);
             return;
         }
 
@@ -343,11 +343,11 @@
         const alt = form.elements.alt.value.trim();
 
         if (!selectedFile) {
-            showMessage('Първо избери снимка.', true);
+            showMessage('Първо изберете снимка.', true);
             return;
         }
         if (!title || !category) {
-            showMessage('Добави заглавие и категория.', true);
+            showMessage('Добавете заглавие и категория.', true);
             return;
         }
 

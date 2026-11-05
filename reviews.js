@@ -13,7 +13,7 @@
     const likedReviewsKey = 'velora-liked-reviews';
     const reviewVisitorKey = 'velora-review-visitor';
     const messages = {
-        bg: { unavailable: 'Формата ще бъде активна скоро.', sending: 'Изпращане…', submit: 'Изпрати мнение', success: 'Благодарим! Мнението ти е изпратено за одобрение.', error: 'Не успяхме да изпратим мнението. Опитай отново.', published: 'КЛИЕНТСКИ ОТЗИВ', like: 'Харесай отзива с 6 звезди', liked: 'Вече харесан отзив' },
+        bg: { unavailable: 'Формата ще бъде активна скоро.', sending: 'Изпращане…', submit: 'Изпратете мнение', success: 'Благодарим! Мнението Ви е изпратено за одобрение.', error: 'Не успяхме да изпратим мнението. Опитайте отново.', published: 'КЛИЕНТСКИ ОТЗИВ', like: 'Харесайте отзива с 6 звезди', liked: 'Вече харесан отзив' },
         en: { unavailable: 'The form will be available soon.', sending: 'Sending…', submit: 'Send review', success: 'Thank you! Your review has been submitted for approval.', error: 'We could not send your review. Please try again.', published: 'CUSTOMER REVIEW', like: 'Like this review with 6 stars', liked: 'Review already liked' }
     };
 
